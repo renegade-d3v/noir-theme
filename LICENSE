@@ -1,0 +1,18 @@
+Noir — Rockbox theme for iPod Video / Classic
+
+Copyright (c) 2026 Andrii
+
+Noir's playback screen and menus are based on "iPod reFresh Three" by Ciprian Dragu,
+licensed under CC BY-SA 3.0, and include artwork derived from it (the Lossless badge and the
+volume / repeat / shuffle icons in tools/assets/refresh and .rockbox/wps/Noir).
+
+Therefore this theme — skins (.wps, .sbs, .cfg), bitmaps and the scripts that generate them —
+is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported licence (CC BY-SA 3.0):
+https://creativecommons.org/licenses/by-sa/3.0/
+
+You are free to share and adapt it, provided you give appropriate credit (to Noir and to
+iPod reFresh Three by Ciprian Dragu) and distribute your contributions under the same licence.
+
+Fonts are NOT covered by this licence and are not included in the repository: they are converted
+locally from Apple's SF Mono and SF Pro Rounded system fonts (tools/make_fonts.sh), which Apple
+licenses for use on Apple platforms only.

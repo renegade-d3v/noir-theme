@@ -1,0 +1,158 @@
+# Noir — playback screen for 320x240 (iPod Video / Classic)
+# Layout and icons after iPod reFresh Three by Ciprian Dragu (CC-BY-SA 3.0)
+%wd
+%Fl(3,22-SF-Pro-Rounded-Semibold.fnt)
+%Fl(4,16-SF-Pro-Rounded-Semibold.fnt)
+%Fl(5,14-SF-Pro-Rounded-Semibold.fnt)
+%Fl(6,14-Noir-Mono.fnt)
+
+#################### STATUS BAR (shared by .wps and .sbs) ####################
+%Fl(2,15-Noir-Mono.fnt)
+%xl(B,battery.bmp,0,0,22)
+%xl(L,lock.bmp,0,0)
+
+# black strip behind the whole status bar (the rest of the theme is #1E1C1A)
+%V(0,0,320,24,-)
+%Vb(000000)
+
+# left: playlist position "4/100"
+%V(8,4,96,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%al%?mp<|%pp/%pe|%pp/%pe|%pp/%pe|%pp/%pe||||>
+
+# hold lock right after the counter (counter width depends on digit count).
+# 1x1 host viewport: it gets cleared on redraw, so it must not cover the counter.
+%V(319,0,1,1,-)
+%Vb(000000)
+%?mh<%?mp<%Vd(lock0)|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%Vd(lock0)|%Vd(lock0)|%Vd(lock0)|%Vd(lock0)>|>
+
+# centre: date and time DD.MM.YYYY H:mm
+%V(96,4,128,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%ac%cd.%cm.%cY %cH:%cM
+
+# right: battery percent + macOS-style battery
+%V(224,4,56,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%ar%bl%%
+%V(284,6,28,13,-)
+%Vb(000000)
+%?bp<%?bc<%?bl<%xd(Bl)|%xd(Bm)|%xd(Bn)|%xd(Bo)|%xd(Bp)|%xd(Bq)|%xd(Br)|%xd(Bs)|%xd(Bt)|%xd(Bu)|%xd(Bv)>|%xd(Bv)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)|%xd(Bg)|%xd(Bh)|%xd(Bi)|%xd(Bj)|%xd(Bk)>>
+
+#################### END STATUS BAR ####################
+
+%xl(w,art_frame.bmp,0,0)
+%xl(P,lossless.bmp,0,0)
+%xl(Q,codec.bmp,0,0)
+%xl(F,pb_fill.bmp,0,0)
+%xl(K,pb_back.bmp,0,0)
+%xl(f,vol_fill.bmp,0,0)
+%xl(k,vol_back.bmp,0,0)
+%xl(l,spk_low.bmp,0,6)
+%xl(h,spk_high.bmp,280,6)
+%xl(V,volume.bmp,0,0,21)
+%xl(W,volume_70.bmp,0,0,21)
+%xl(X,volume_35.bmp,0,0,21)
+%xl(R,repeat.bmp,48,8,5)
+%xl(T,repeat_70.bmp,48,8,5)
+%xl(U,repeat_35.bmp,48,8,5)
+%xl(S,shuffle.bmp,86,8,2)
+%xl(Y,shuffle_70.bmp,86,8,2)
+%xl(Z,shuffle_35.bmp,86,8,2)
+%Cl(2,2,136,136,c,c)
+
+# album art, rounded-md corners + 2px accent border (one overlay image drawn on top)
+%V(10,28,140,140,-)
+%?C<%Cd|%dr(2,2,136,136,2C2A27)>%xd(w)
+
+# title (scrolls like a marquee when too long)
+%V(160,29,148,23,3)
+%Vf(39FF88)
+%s%al%?it<%it|%fn>
+
+# artist
+%V(160,52,148,17,4)
+%Vf(DCDCDC)
+%s%al%?ia<%ia|%?iA<%iA|>>
+
+# album • year
+%V(160,68,148,17,4)
+%Vf(9A9A9A)
+%s%al%?id<%id|>%?id<%?iy< • |>|>%?iy<%iy|>
+
+# genre
+%V(160,85,148,15,5)
+%Vf(6E6E6E)
+%s%al%?ig<%ig|>
+
+# format: Lossless badge (aiff, wav, flac, alac, shorten) or note+waves icon with codec name
+%?or(%if(%fc,=,4),%if(%fc,=,5),%if(%fc,=,7),%if(%fc,=,11),%if(%fc,=,13))<%Vd(lossless)|%Vd(lossy)%Vd(lossyname)>
+%Vl(lossless,160,130,63,17,-)
+%xd(P)
+%Vl(lossy,160,130,26,17,-)
+%xd(Q)
+%Vl(lossyname,191,131,117,15,5)
+%Vf(FFFFFF)
+%al%fc
+
+# file info (mono bold, 1px smaller than the status bar)
+%V(160,151,148,15,6)
+%Vf(9A9A9A)
+%al%?or(%if(%fc,=,4),%if(%fc,=,5),%if(%fc,=,7),%if(%fc,=,11),%if(%fc,=,13))<%fc |>%fbkbps %fkkHz
+
+# progress bar, rounded ends
+%V(12,178,296,5,-)
+%pb(0,0,296,5,F,backdrop,K)
+
+# times
+%V(12,186,96,16,2)
+%Vf(9A9A9A)
+%al%pc
+%V(212,186,96,16,2)
+%Vf(9A9A9A)
+%ar-%pr
+
+# bottom: volume slider while the volume changes, then the icon row fades back in
+%V(0,198,320,42,-)
+%?mv(1.0)<%Vd(volbar)|%?mv(1.2)<%Vd(row35)|%?mv(1.4)<%Vd(row70)|%Vd(row)>>>
+
+%Vl(volbar,12,206,296,24,-)
+%xd(l)%xd(h)%pv(24,10,248,5,f,backdrop,k)
+
+%Vl(row,104,200,112,36,-)
+%?pv<%xd(Va)|%xd(Vb)|%xd(Vc)|%xd(Vd)|%xd(Ve)|%xd(Vf)|%xd(Vg)|%xd(Vh)|%xd(Vi)|%xd(Vj)|%xd(Vk)|%xd(Vl)|%xd(Vm)|%xd(Vn)|%xd(Vo)|%xd(Vp)|%xd(Vq)|%xd(Vr)|%xd(Vs)|%xd(Vt)|%xd(Vu)>%?mm<%xd(Ra)|%xd(Rb)|%xd(Rc)|%xd(Rd)|%xd(Re)>%?ps<%xd(Sa)|%xd(Sb)>
+
+%Vl(row70,104,200,112,36,-)
+%?pv<%xd(Wa)|%xd(Wb)|%xd(Wc)|%xd(Wd)|%xd(We)|%xd(Wf)|%xd(Wg)|%xd(Wh)|%xd(Wi)|%xd(Wj)|%xd(Wk)|%xd(Wl)|%xd(Wm)|%xd(Wn)|%xd(Wo)|%xd(Wp)|%xd(Wq)|%xd(Wr)|%xd(Ws)|%xd(Wt)|%xd(Wu)>%?mm<%xd(Ta)|%xd(Tb)|%xd(Tc)|%xd(Td)|%xd(Te)>%?ps<%xd(Ya)|%xd(Yb)>
+
+%Vl(row35,104,200,112,36,-)
+%?pv<%xd(Xa)|%xd(Xb)|%xd(Xc)|%xd(Xd)|%xd(Xe)|%xd(Xf)|%xd(Xg)|%xd(Xh)|%xd(Xi)|%xd(Xj)|%xd(Xk)|%xd(Xl)|%xd(Xm)|%xd(Xn)|%xd(Xo)|%xd(Xp)|%xd(Xq)|%xd(Xr)|%xd(Xs)|%xd(Xt)|%xd(Xu)>%?mm<%xd(Ua)|%xd(Ub)|%xd(Uc)|%xd(Ud)|%xd(Ue)>%?ps<%xd(Za)|%xd(Zb)>
+
+# status bar: lock positions (labelled viewports, keep at the end of the file)
+%Vl(lock0,8,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock2,35,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock3,43,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock4,51,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock5,59,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock6,67,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock7,75,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock8,83,6,10,13,-)
+%Vb(000000)
+%xd(L)

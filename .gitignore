@@ -1,0 +1,12 @@
+# build products
+dist/
+*.zip
+tools/.build/
+__pycache__/
+*.pyc
+
+# Fonts are converted from Apple's SF Mono / SF Pro Rounded, whose licence does not allow
+# redistribution. Build them locally with tools/make_fonts.sh.
+.rockbox/fonts/*.fnt
+
+.DS_Store

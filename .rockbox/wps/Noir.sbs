@@ -1,0 +1,109 @@
+# Noir — status bar skin (menus) for 320x240
+# Menu layout after iPod reFresh Three by Ciprian Dragu (CC-BY-SA 3.0), without icons
+%wd
+%Fl(4,16-SF-Pro-Rounded-Semibold.fnt)
+%xl(w,cornerTL_s.bmp,0,0)
+%xl(x,cornerTR_s.bmp,26,0)
+%xl(y,cornerBL_s.bmp,0,26)
+%xl(z,cornerBR_s.bmp,26,26)
+#################### STATUS BAR (shared by .wps and .sbs) ####################
+%Fl(2,15-Noir-Mono.fnt)
+%xl(B,battery.bmp,0,0,22)
+%xl(L,lock.bmp,0,0)
+
+# black strip behind the whole status bar (the rest of the theme is #1E1C1A)
+%V(0,0,320,24,-)
+%Vb(000000)
+
+# left: playlist position "4/100"
+%V(8,4,96,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%al%?mp<|%pp/%pe|%pp/%pe|%pp/%pe|%pp/%pe||||>
+
+# hold lock right after the counter (counter width depends on digit count).
+# 1x1 host viewport: it gets cleared on redraw, so it must not cover the counter.
+%V(319,0,1,1,-)
+%Vb(000000)
+%?mh<%?mp<%Vd(lock0)|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%?if(%pe,<,10)<%Vd(lock2)|%?if(%pe,<,100)<%?if(%pp,<,10)<%Vd(lock3)|%Vd(lock4)>|%?if(%pe,<,1000)<%?if(%pp,<,10)<%Vd(lock4)|%?if(%pp,<,100)<%Vd(lock5)|%Vd(lock6)>>|%?if(%pp,<,10)<%Vd(lock5)|%?if(%pp,<,100)<%Vd(lock6)|%?if(%pp,<,1000)<%Vd(lock7)|%Vd(lock8)>>>>>>|%Vd(lock0)|%Vd(lock0)|%Vd(lock0)|%Vd(lock0)>|>
+
+# centre: date and time DD.MM.YYYY H:mm
+%V(96,4,128,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%ac%cd.%cm.%cY %cH:%cM
+
+# right: battery percent + macOS-style battery
+%V(224,4,56,16,2)
+%Vb(000000)
+%Vf(FFFFFF)
+%ar%bl%%
+%V(284,6,28,13,-)
+%Vb(000000)
+%?bp<%?bc<%?bl<%xd(Bl)|%xd(Bm)|%xd(Bn)|%xd(Bo)|%xd(Bp)|%xd(Bq)|%xd(Br)|%xd(Bs)|%xd(Bt)|%xd(Bu)|%xd(Bv)>|%xd(Bv)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)|%xd(Bg)|%xd(Bh)|%xd(Bi)|%xd(Bj)|%xd(Bk)>>
+
+#################### END STATUS BAR ####################
+
+# now-playing bar at the bottom while music plays (album art + artist - title)
+%?mp<|%?C<%Vd(albumart)%Vd(currenttrack)|%Vd(currenttrackshiftedleft)>|%?C<%Vd(albumart)%Vd(currenttrack)|%Vd(currenttrackshiftedleft)>>
+
+# menu area: smaller while playing to leave room for the now-playing bar
+%?mp<%VI(mainlarge)|%VI(main)|%VI(main)>
+%Vi(main,8,32,304,172,1)
+%Vf(FFFFFF)
+%Vb(1E1C1A)
+%Vi(mainlarge,8,32,304,208,1)
+%Vf(FFFFFF)
+%Vb(1E1C1A)
+
+# skinned list: every item is drawn from the "item" viewport (304x21).
+# Selected item: solid neon-green line (%Vs gradient with equal colours) + black text,
+# rounded by 6px corner masks drawn on top. Padding 9px: three leading spaces on the left,
+# a 9px cap image on the right (images draw over text, so it trims the line like a margin).
+%Lb(item,304,21)
+%xl(a,cornerTL.bmp,0,0)
+%xl(c,cornerBL.bmp,0,15)
+%xl(e,menu_cap_sel.bmp,295,0)
+%xl(f,menu_cap.bmp,295,0)
+%Vl(item,0,0,304,21,1)
+%Vf(FFFFFF)
+%Vg(39FF88,39FF88,1E1C1A)
+%?Lc<%Vs(gradient)%s   %LT%xd(a)%xd(c)%xd(e)|%Vs(clear)   %LT%xd(f)>
+
+%Vl(albumart,12,-36,30,30,-)
+%Cl(0,0,30,30)
+%Cd%xd(w)%xd(x)%xd(y)%xd(z)
+
+%Vl(currenttrack,50,-29,-11,-,4)
+%Vf(FFFFFF)
+%s%al%?ia<%ia - |>%?it<%it|%fn>
+
+%Vl(currenttrackshiftedleft,11,-29,-11,-,4)
+%Vf(FFFFFF)
+%s%al%?ia<%ia - |>%?it<%it|%fn>
+
+# status bar: lock positions (labelled viewports, keep at the end of the file)
+%Vl(lock0,8,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock2,35,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock3,43,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock4,51,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock5,59,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock6,67,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock7,75,6,10,13,-)
+%Vb(000000)
+%xd(L)
+%Vl(lock8,83,6,10,13,-)
+%Vb(000000)
+%xd(L)
